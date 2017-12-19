@@ -27,4 +27,8 @@ export class TodoService {
   updateTodo(todo: Todo) {
     this.afs.doc<Todo>(`todos/${todo.id}`).update(todo);
   }
+
+  deleteTodo(todoId: String) {
+    this.afs.doc<Todo>(`todos/${todoId}`).delete();
+  }
 }
