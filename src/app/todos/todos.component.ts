@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Todo } from '../todo';
+import { TodoService } from '../todo.service';
 
+import { Todo } from '../todo';
 import { TODOS } from '../mock-todos';
 
 @Component({
@@ -11,13 +12,18 @@ import { TODOS } from '../mock-todos';
 })
 export class TodosComponent implements OnInit {
 
-  todos = TODOS;
+  todos: Todo[];
   newTodoTitle: string = "";
   newTodo: Todo;
 
-  constructor() { }
+  constructor( private todoService: TodoService) { }
 
   ngOnInit() {
+    this.getTodos();
+  }
+
+  getTodos() {
+    this.todos = this.todoService.getTodos();
   }
 
   addTodo() {
@@ -26,7 +32,7 @@ export class TodosComponent implements OnInit {
       title: this.newTodoTitle,
       completed: false
     }
-    this.todos.push(this.newTodo);
+    this.todoService.addTodo(this.newTodo);
     this.newTodoTitle = "";
   }
 
