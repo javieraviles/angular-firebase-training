@@ -12,7 +12,7 @@ import { TODOS } from '../mock-todos';
 })
 export class TodosComponent implements OnInit {
 
-  todos: Todo[];
+  todos: Todo[] = [];
   newTodoTitle: string = "";
   newTodo: Todo;
 
@@ -20,6 +20,10 @@ export class TodosComponent implements OnInit {
 
   ngOnInit() {
     this.getTodos();
+  }
+
+  calculateNextTodoId():string {
+    return this.todos.length > 0 ? String(Number(this.todos[this.todos.length-1].id)+1) : "1";
   }
 
   getTodos() {
@@ -30,7 +34,7 @@ export class TodosComponent implements OnInit {
 
   addTodo() {
     this.newTodo = {
-      id: String(this.todos.length+1),
+      id: this.calculateNextTodoId(),
       title: this.newTodoTitle,
       completed: false
     }
