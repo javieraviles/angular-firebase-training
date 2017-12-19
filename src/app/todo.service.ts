@@ -21,6 +21,6 @@ export class TodoService {
   }
 
   addTodo(todo: Todo) {
-    this.todosCollection.add(todo)
+    this.todosCollection.doc(todo.id).set(todo);
   }
 }

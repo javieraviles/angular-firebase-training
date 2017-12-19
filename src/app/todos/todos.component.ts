@@ -30,7 +30,7 @@ export class TodosComponent implements OnInit {
 
   addTodo() {
     this.newTodo = {
-      id: this.todos.length+1,
+      id: String(this.todos.length+1),
       title: this.newTodoTitle,
       completed: false
     }
