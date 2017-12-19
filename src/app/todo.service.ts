@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
 
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+
 import { Todo } from './todo'
 import { TODOS } from './mock-todos'
 
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class TodoService {
 
-  constructor() { }
+  private todosCollection: AngularFirestoreCollection<Todo>;
+  todos: Observable<Todo[]>;
+
+  constructor(private afs: AngularFirestore) { }
 
   getTodos():Observable<Todo[]> {
-    return of(TODOS);
+    this.todosCollection = this.afs.collection<Todo>('todos');
+    return this.todosCollection.valueChanges();
   }
 
   addTodo(todo: Todo) {
-    TODOS.push(todo);
+    this.todosCollection.add(todo)
   }
 }
