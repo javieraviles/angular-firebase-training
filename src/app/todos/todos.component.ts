@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Todo } from '../todo';
+import { Todo } from '../todo';
 
 import { TODOS } from '../mock-todos';
 
@@ -12,10 +12,22 @@ import { TODOS } from '../mock-todos';
 export class TodosComponent implements OnInit {
 
   todos = TODOS;
+  newTodoTitle: string = "";
+  newTodo: Todo;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addTodo() {
+    this.newTodo = {
+      id: this.todos.length+1,
+      title: this.newTodoTitle,
+      completed: false
+    }
+    this.todos.push(this.newTodo);
+    this.newTodoTitle = "";
   }
 
 }

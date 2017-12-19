@@ -1,5 +1,8 @@
 <ul>
   <li *ngFor="let todo of todos">
-    {{todo.title}}
+    <input type="checkbox" [checked]="todo.completed"> {{todo.title}}
   </li>
 </ul>
+
+<input [(ngModel)]="newTodoTitle" type="text" placeholder="new ToDo">
+<button (click)="addTodo()">Add</button>
