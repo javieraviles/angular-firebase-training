@@ -38,4 +38,8 @@ export class TodosComponent implements OnInit {
     this.newTodoTitle = "";
   }
 
+  completeTodo(todo: Todo) {
+    todo.completed = !todo.completed;
+    this.todoService.updateTodo(todo);
+  }
 }

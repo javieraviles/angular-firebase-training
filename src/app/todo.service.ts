@@ -23,4 +23,8 @@ export class TodoService {
   addTodo(todo: Todo) {
     this.todosCollection.doc(todo.id).set(todo);
   }
+
+  updateTodo(todo: Todo) {
+    this.afs.doc<Todo>(`todos/${todo.id}`).update(todo);
+  }
 }
